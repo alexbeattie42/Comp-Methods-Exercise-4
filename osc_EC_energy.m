@@ -1,5 +1,7 @@
 %% Exercise 4.10: Compute the energy in oscillations
 %   Based on the file osc_EC.m 
+clear;clc;close;
+
 omega = 2;
 P = 2*pi/omega;
 dt = P/20;

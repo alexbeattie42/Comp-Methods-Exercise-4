@@ -4,7 +4,8 @@ clear;clc;close;
 
 omega = 2;
 P = 2*pi/omega;
-dt = P/20;
+% dt = P/20;
+dt = P/2000;
 T = 3*P;
 N_t = floor(round(T/dt));
 t = linspace(0, N_t*dt, N_t+1);
@@ -18,13 +19,12 @@ u(1) = X_0;
 v(1) = 0;
 
 % Step equations forward in time
-for n = 1:N_t
-    u(n+1) = u(n) + dt*v(n);
-    v(n+1) = v(n) - dt*omega^2*u(n);
+for n = 2:N_t+1
+    u(n) = (1 /(1 + (dt * omega)^2)) * (dt * v(n-1) + u(n - 1));
+    v(n) = (1 /(1 + (dt * omega)^2)) * (-dt * omega^2 * u(n - 1) + v(n - 1));
 end
 
-[potential, kinentic] = osc_energy(u, v, omega);
-
-plot(t, potential+kinentic, 'r-');
+calc_u = X_0*cos(omega * t);
+plot(t, u, 'r--', t, calc_u , 'k-');
+legend('calculated', 'correct', 'Location', 'southeast');
 xlabel('time');
-ylabel('Potential (U) + Kinetic (K)');
