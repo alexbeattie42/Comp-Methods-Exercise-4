@@ -28,3 +28,4 @@ end
 plot(t, potential+kinentic, 'r-');
 xlabel('time');
 ylabel('Potential (U) + Kinetic (K)');
+saveas(gcf,"output_osc_EC_energy.png")
