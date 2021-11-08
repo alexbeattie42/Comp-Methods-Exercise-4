@@ -4,8 +4,9 @@ clear;clc;close;
 
 omega = 2;
 P = 2*pi/omega;
-% dt = P/20;
-dt = P/2000;
+dt = P/20; dt_name = 20;
+% dt = P/2000;  dt_name = 2000;% Toggle the comment to change the dt value
+dt_start = dt;
 T = 3*P;
 N_t = floor(round(T/dt));
 t = linspace(0, N_t*dt, N_t+1);
@@ -28,3 +29,4 @@ calc_u = X_0*cos(omega * t);
 plot(t, u, 'r--', t, calc_u , 'k-');
 legend('calculated', 'correct', 'Location', 'southeast');
 xlabel('time');
+saveas(gcf,sprintf("output_osc_BE_energy_%d.png",dt_name))

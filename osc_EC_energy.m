@@ -19,8 +19,8 @@ v(1) = 0;
 
 % Step equations forward in time
 for n = 1:N_t
-    u(n+1) = u(n) + dt*v(n+1);
     v(n+1) = v(n) - dt*omega^2*u(n);
+    u(n+1) = u(n) + dt*v(n+1);
 end
 
 [potential, kinentic] = osc_energy(u, v, omega);
